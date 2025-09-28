@@ -7,7 +7,7 @@ on:
 
 jobs:
   production:
-    uses: DrishtiJain17/github-ci/.github/workflows/ci.yml@main
+    uses: jalantechnologies/github-ci/.github/workflows/ci.yml@v3.2.3
     concurrency:
       group: ci-production-${{ github.event.ref }}
       cancel-in-progress: true
@@ -18,7 +18,7 @@ jobs:
       app_hostname: flask-react-template.platform.bettrhq.com
       branch: ${{ github.event.ref }}
       checks: "['npm:coverage', 'npm:lint', 'compose:test']"
-      docker_registry: ${{ vars.DOCKER_REGISTRY }}
+      docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
       docker_username: ${{ vars.DOCKER_USERNAME }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}

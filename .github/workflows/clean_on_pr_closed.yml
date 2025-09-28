@@ -6,7 +6,7 @@ on:
 
 jobs:
   clean:
-    uses: DrishtiJain17/github-ci/.github/workflows/clean.yml@main
+    uses: jalantechnologies/github-ci/.github/workflows/clean.yml@v3.2.3
     concurrency:
       group: ci-preview-${{ github.event.pull_request.head.ref }}
       cancel-in-progress: true
@@ -15,7 +15,7 @@ jobs:
       app_name: frm-boilerplate
       app_env: preview
       branch: ${{ github.event.pull_request.head.ref }}
-      docker_registry: ${{ vars.DOCKER_REGISTRY }}
+      docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
       docker_username: ${{ vars.DOCKER_USERNAME }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
