@@ -5,7 +5,7 @@ on: delete
 jobs:
   clean:
     if: github.event.ref_type == 'branch'
-    uses: DrishtiJain17/github-ci/.github/workflows/clean.yml@main # Update repo details
+    uses: DrishtiJain17/github-ci/.github/workflows/clean.yml@main # Updated repo details
     concurrency:
       group: ci-preview-${{ github.event.ref }}
       cancel-in-progress: true
