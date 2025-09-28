@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 
 from modules.comment.errors import CommentBadRequestError
 from modules.comment.rest_api.comment_view import CommentView

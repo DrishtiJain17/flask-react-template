@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import cast
 
 from modules.application.base_model import BaseModel
 
@@ -20,8 +21,8 @@ class CommentModel(BaseModel):
             task_id=bson_data.get("task_id", ""),
             account_id=bson_data.get("account_id", ""),
             text=bson_data.get("text", ""),
-            created_at=bson_data.get("created_at"),
-            updated_at=bson_data.get("updated_at"),
+            created_at=cast(datetime, bson_data.get("created_at")),
+            updated_at=cast(datetime, bson_data.get("updated_at")),
         )
 
     @staticmethod

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { Button, Input, FormControl } from 'frontend/components';
-import { Task } from 'frontend/types/task';
-import TaskService from 'frontend/services/task.service';
 import { useAccountContext } from 'frontend/contexts/account.provider';
+import TaskService from 'frontend/services/task.service';
 import { getAccessTokenFromStorage } from 'frontend/utils/storage-util';
+
 import { ButtonType, ButtonKind } from 'frontend/types/button';
+import { Task } from 'frontend/types/task';
 
 const TasksPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -24,7 +26,7 @@ const TasksPage: React.FC = () => {
     setEditDescription(task.description);
   };
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     if (!accountDetails?.id || !token) return;
 
     setLoading(true);
@@ -37,11 +39,10 @@ const TasksPage: React.FC = () => {
         setTasks(response.data);
       }
     } catch (err) {
-      console.error('Failed to fetch tasks', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [accountDetails?.id, token]);
 
   const createNewTask = async () => {
     if (!title.trim() || !accountDetails?.id || !token) return;
@@ -57,7 +58,6 @@ const TasksPage: React.FC = () => {
         setDescription('');
       }
     } catch (err) {
-      console.error('Failed to create task', err);
     }
   };
 
@@ -67,8 +67,12 @@ const TasksPage: React.FC = () => {
       await new TaskService().deleteTask(accountDetails.id, taskId, token);
       setTasks(tasks.filter((t) => t.id !== taskId));
     } catch (err) {
-      console.error('Failed to delete task', err);
     }
+  };
+  const cancelEditing = () => {
+    setEditingTaskId(null);
+    setEditTitle('');
+    setEditDescription('');
   };
   const updateTask = async () => {
     if (!accountDetails?.id || !token || !editingTaskId) return;
@@ -85,20 +89,14 @@ const TasksPage: React.FC = () => {
         cancelEditing();
       }
     } catch (err) {
-      console.error('Failed to update task', err);
     }
-  };
-  const cancelEditing = () => {
-    setEditingTaskId(null);
-    setEditTitle('');
-    setEditDescription('');
   };
 
   useEffect(() => {
     if (accountDetails?.id && token) {
-      fetchTasks();
+      void fetchTasks();
     }
-  }, [accountDetails?.id, token]);
+  }, [accountDetails?.id, token, fetchTasks]);
 
   return (
     <div className="p-4 space-y-6">
@@ -106,7 +104,7 @@ const TasksPage: React.FC = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createNewTask();
+          void createNewTask();
         }}
         className="space-y-4"
       >
@@ -153,7 +151,7 @@ const TasksPage: React.FC = () => {
                     placeholder="Edit description"
                   />
                   <div className="flex space-x-2 mt-2">
-                    <Button type={ButtonType.SUBMIT} onClick={updateTask}>
+                    <Button type={ButtonType.SUBMIT} onClick={() => void updateTask()}>
                       Save
                     </Button>
                     <Button
@@ -182,7 +180,7 @@ const TasksPage: React.FC = () => {
                     <Button
                       type={ButtonType.SUBMIT}
                       kind={ButtonKind.SECONDARY}
-                      onClick={() => deleteTask(task.id)}
+                      onClick={() => void deleteTask(task.id)}
                     >
                       Delete
                     </Button>
