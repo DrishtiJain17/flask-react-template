@@ -16,7 +16,7 @@ jobs:
       branch: ${{ github.event.ref }}
       build_args: |
         APP_ENV=preview
-      docker_registry: ${{ vars.DOCKER_REGISTRY }}
+      docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
       docker_username: ${{ vars.DOCKER_USERNAME }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
