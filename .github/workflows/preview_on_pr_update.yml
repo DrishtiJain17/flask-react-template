@@ -40,7 +40,7 @@ jobs:
       build_args: |
         APP_ENV=preview
       checks: "['npm:coverage', 'npm:lint', 'compose:test']"
-      docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
+      docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }} # default to Docker Hub if not set
       docker_username: ${{ vars.DOCKER_USERNAME }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
