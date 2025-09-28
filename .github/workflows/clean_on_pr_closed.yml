@@ -16,7 +16,7 @@ jobs:
       app_env: preview
       branch: ${{ github.event.pull_request.head.ref }}
       docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
-      docker_registry: ${{ vars.DOCKER_REGISTRY || 'drishtijain17' }}
+      docker_username: ${{ vars.DOCKER_REGISTRY || 'drishtijain17' }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
       do_cluster_id: ${{ vars.DO_CLUSTER_ID }}
