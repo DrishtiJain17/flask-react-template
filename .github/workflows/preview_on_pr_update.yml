@@ -18,7 +18,6 @@ jobs:
           BRANCH_REF="${{ github.event.pull_request.head.ref }}"
           SANITIZED_BRANCH=$(echo "${BRANCH_REF}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9\._-]/-/g')
           SANITIZED_BRANCH=$(echo "$SANITIZED_BRANCH" | sed 's/^-*//;s/-*$//;s/^\.*//;s/\.*$//')
-
           echo "Original branch: $BRANCH_REF"
           echo "Sanitized branch: $SANITIZED_BRANCH"
           echo "clean_name=$SANITIZED_BRANCH" >> $GITHUB_OUTPUT
