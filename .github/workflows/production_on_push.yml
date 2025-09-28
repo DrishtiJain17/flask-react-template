@@ -19,7 +19,7 @@ jobs:
       branch: ${{ github.event.ref }}
       checks: "['npm:coverage', 'npm:lint', 'compose:test']"
       docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
-      docker_username: ${{ vars.DOCKER_USERNAME }}
+      docker_registry: ${{ vars.DOCKER_REGISTRY || 'drishtijain17' }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
       sonar_host_url: ${{ vars.SONAR_HOST_URL }}

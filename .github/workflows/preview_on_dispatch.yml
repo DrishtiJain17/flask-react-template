@@ -17,7 +17,7 @@ jobs:
       build_args: |
         APP_ENV=preview
       docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }}
-      docker_username: ${{ vars.DOCKER_USERNAME }}
+      docker_registry: ${{ vars.DOCKER_REGISTRY || 'drishtijain17' }}
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
       do_cluster_id: ${{ vars.DO_CLUSTER_ID }}
