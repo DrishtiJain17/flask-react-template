@@ -3,10 +3,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Input, FormControl } from 'frontend/components';
 import { useAccountContext } from 'frontend/contexts/account.provider';
 import TaskService from 'frontend/services/task.service';
-import { getAccessTokenFromStorage } from 'frontend/utils/storage-util';
 
 import { ButtonType, ButtonKind } from 'frontend/types/button';
 import { Task } from 'frontend/types/task';
+import { getAccessTokenFromStorage } from 'frontend/utils/storage-util';
 
 const TasksPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -39,6 +39,7 @@ const TasksPage: React.FC = () => {
         setTasks(response.data);
       }
     } catch (err) {
+      /* NOP (No operation required on error) */
     } finally {
       setLoading(false);
     }
@@ -58,6 +59,7 @@ const TasksPage: React.FC = () => {
         setDescription('');
       }
     } catch (err) {
+      /* NOP (No operation required on error) */
     }
   };
 
@@ -67,13 +69,16 @@ const TasksPage: React.FC = () => {
       await new TaskService().deleteTask(accountDetails.id, taskId, token);
       setTasks(tasks.filter((t) => t.id !== taskId));
     } catch (err) {
+      /* NOP (No operation required on error) */
     }
   };
+
   const cancelEditing = () => {
     setEditingTaskId(null);
     setEditTitle('');
     setEditDescription('');
   };
+
   const updateTask = async () => {
     if (!accountDetails?.id || !token || !editingTaskId) return;
     try {
@@ -89,12 +94,13 @@ const TasksPage: React.FC = () => {
         cancelEditing();
       }
     } catch (err) {
+      /* NOP (No operation required on error) */
     }
   };
 
   useEffect(() => {
     if (accountDetails?.id && token) {
-      void fetchTasks();
+      fetchTasks();
     }
   }, [accountDetails?.id, token, fetchTasks]);
 
@@ -104,7 +110,7 @@ const TasksPage: React.FC = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void createNewTask();
+          createNewTask();
         }}
         className="space-y-4"
       >
@@ -151,7 +157,7 @@ const TasksPage: React.FC = () => {
                     placeholder="Edit description"
                   />
                   <div className="flex space-x-2 mt-2">
-                    <Button type={ButtonType.SUBMIT} onClick={() => void updateTask()}>
+                    <Button type={ButtonType.SUBMIT} onClick={() => updateTask()}>
                       Save
                     </Button>
                     <Button
@@ -180,7 +186,7 @@ const TasksPage: React.FC = () => {
                     <Button
                       type={ButtonType.SUBMIT}
                       kind={ButtonKind.SECONDARY}
-                      onClick={() => void deleteTask(task.id)}
+                      onClick={() => deleteTask(task.id)}
                     >
                       Delete
                     </Button>
