@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Input, FormControl } from 'frontend/components';
 import { useAccountContext } from 'frontend/contexts/account.provider';
 import TaskService from 'frontend/services/task.service';
-
 import { ButtonType, ButtonKind } from 'frontend/types/button';
 import { Task } from 'frontend/types/task';
 import { getAccessTokenFromStorage } from 'frontend/utils/storage-util';
