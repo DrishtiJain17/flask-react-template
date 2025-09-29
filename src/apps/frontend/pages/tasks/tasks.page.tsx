@@ -99,7 +99,7 @@ const TasksPage: React.FC = () => {
 
   useEffect(() => {
     if (accountDetails?.id && token) {
-      fetchTasks();
+      fetchTasks().catch(() => {});
     }
   }, [accountDetails?.id, token, fetchTasks]);
 
@@ -107,10 +107,7 @@ const TasksPage: React.FC = () => {
     <div className="p-4 space-y-6">
       <h2 className="text-xl font-bold">Tasks</h2>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          createNewTask();
-        }}
+        onSubmit={(e) => { e.preventDefault(); createNewTask().catch(() => {}); }}
         className="space-y-4"
       >
         <FormControl label="Title">
@@ -156,7 +153,7 @@ const TasksPage: React.FC = () => {
                     placeholder="Edit description"
                   />
                   <div className="flex space-x-2 mt-2">
-                    <Button type={ButtonType.SUBMIT} onClick={() => updateTask()}>
+                    <Button type={ButtonType.SUBMIT} onClick={() => updateTask().catch(() => {})}>
                       Save
                     </Button>
                     <Button
@@ -185,7 +182,7 @@ const TasksPage: React.FC = () => {
                     <Button
                       type={ButtonType.SUBMIT}
                       kind={ButtonKind.SECONDARY}
-                      onClick={() => deleteTask(task.id)}
+                      onClick={() => deleteTask(task.id).catch(() => {})}
                     >
                       Delete
                     </Button>

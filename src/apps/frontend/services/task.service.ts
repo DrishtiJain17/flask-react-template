@@ -1,6 +1,6 @@
 import APIService from 'frontend/services/api.service';
-import { JsonObject } from 'frontend/types/common-types';
 import { ApiResponse } from 'frontend/types';
+import { JsonObject } from 'frontend/types/common-types';
 import { Task } from 'frontend/types/task';
 
 export default class TaskService extends APIService {

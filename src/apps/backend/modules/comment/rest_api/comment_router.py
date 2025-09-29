@@ -21,7 +21,7 @@ class CommentRouter:
         )
 
         @blueprint.errorhandler(CommentBadRequestError)
-        def handle_bad_request_error(error) -> Any:
+        def handle_bad_request_error(error : CommentBadRequestError) -> Any:
             response = jsonify({"code": error.code, "message": error.message})
             response.status_code = error.http_status_code
             return response
