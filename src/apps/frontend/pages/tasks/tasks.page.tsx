@@ -38,7 +38,7 @@ const TasksPage: React.FC = () => {
         setTasks(response.data);
       }
     } catch (err) {
-      /*console.error('Failed to fetch tasks:', err); */
+      /* console.error('Failed to fetch tasks:', err); */
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,7 @@ const TasksPage: React.FC = () => {
         setDescription('');
       }
     } catch (err) {
-      /*console.error('Failed to create task:', err);*/
+      /* console.error('Failed to create task:', err); */
     }
   };
 
