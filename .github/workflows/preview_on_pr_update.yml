@@ -26,6 +26,10 @@ jobs:
     # only run when updating an 'Open' PR
     needs: sanitize_branch
     if: github.event.pull_request.state == 'open'
+    permissions:
+      contents: read     
+      pull-requests: write 
+      issues: write
     uses: jalantechnologies/github-ci/.github/workflows/ci.yml@v3.2.3
     concurrency:
       group: ci-preview-${{ needs.sanitize_branch.outputs.sanitized_branch }}
@@ -41,7 +45,7 @@ jobs:
         APP_ENV=preview
       checks: "['npm:coverage', 'npm:lint', 'compose:test']"
       docker_registry: ${{ vars.DOCKER_REGISTRY || 'registry.hub.docker.com' }} # default to Docker Hub if not set
-      docker_registry: ${{ vars.DOCKER_REGISTRY || 'drishtijain17' }}
+      docker_username: ${{ vars.DOCKER_REGISTRY || 'drishtijain17' }} # default to Docker Hub username if not set
       aws_cluster_name: ${{ vars.AWS_CLUSTER_NAME }}
       aws_region: ${{ vars.AWS_REGION }}
       pull_request_number: ${{ github.event.number }}

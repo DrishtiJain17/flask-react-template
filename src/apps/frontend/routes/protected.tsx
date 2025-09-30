@@ -5,8 +5,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import routes from 'frontend/constants/routes';
 import { useAccountContext, useAuthContext } from 'frontend/contexts';
 import { Dashboard, NotFound } from 'frontend/pages';
-import TasksPage from 'frontend/pages/tasks/tasks.page';
 import AppLayout from 'frontend/pages/app-layout/app-layout';
+import TasksPage from 'frontend/pages/tasks/tasks.page';
 import { AsyncError } from 'frontend/types';
 
 const App = () => {

@@ -1,4 +1,6 @@
-from flask import Blueprint
+from typing import Any
+
+from flask import Blueprint, jsonify
 
 from modules.comment.errors import CommentBadRequestError
 from modules.comment.rest_api.comment_view import CommentView
@@ -19,9 +21,9 @@ class CommentRouter:
         )
 
         @blueprint.errorhandler(CommentBadRequestError)
-        def handle_bad_request_error(error):
+        def handle_bad_request_error(error : CommentBadRequestError) -> Any:
             response = jsonify({"code": error.code, "message": error.message})
-            response.status_code = error.http_status_code
+            response.status_code = error.http_status_code # type: ignore[attr-defined]
             return response
 
         return blueprint
