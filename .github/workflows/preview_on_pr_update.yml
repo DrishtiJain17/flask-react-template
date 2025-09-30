@@ -26,6 +26,10 @@ jobs:
     # only run when updating an 'Open' PR
     needs: sanitize_branch
     if: github.event.pull_request.state == 'open'
+    permissions:
+      contents: read     
+      pull-requests: write 
+      issues: write
     uses: jalantechnologies/github-ci/.github/workflows/ci.yml@v3.2.3
     concurrency:
       group: ci-preview-${{ needs.sanitize_branch.outputs.sanitized_branch }}

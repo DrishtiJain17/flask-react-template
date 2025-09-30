@@ -38,7 +38,7 @@ const TasksPage: React.FC = () => {
         setTasks(response.data);
       }
     } catch (err) {
-      /* NOP (No operation required on error) */
+      /*console.error('Failed to fetch tasks:', err); */
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,7 @@ const TasksPage: React.FC = () => {
         setDescription('');
       }
     } catch (err) {
-      /* NOP (No operation required on error) */
+      /*console.error('Failed to create task:', err);*/
     }
   };
 
@@ -68,7 +68,7 @@ const TasksPage: React.FC = () => {
       await new TaskService().deleteTask(accountDetails.id, taskId, token);
       setTasks(tasks.filter((t) => t.id !== taskId));
     } catch (err) {
-      /* NOP (No operation required on error) */
+      /* console.error('Failed to delete task:', err); */
     }
   };
 
@@ -93,7 +93,7 @@ const TasksPage: React.FC = () => {
         cancelEditing();
       }
     } catch (err) {
-      /* NOP (No operation required on error) */
+      /* console.error('Failed to update task:', err); */
     }
   };
 
@@ -170,7 +170,7 @@ const TasksPage: React.FC = () => {
                 <>
                   <div>
                     <p className="font-semibold">{task.title}</p>
-                    <p className="text-sm text-gray-500">{task.description}</p>
+                    <p className="text-sm text-slate-500">{task.description}</p>
                   </div>
                   <div className="flex space-x-2">
                     <Button
