@@ -153,7 +153,7 @@ const TasksPage: React.FC = () => {
                     placeholder="Edit description"
                   />
                   <div className="flex space-x-2 mt-2">
-                    <Button type={ButtonType.SUBMIT} onClick={() => {(async () => {await updateTask().catch(() => {});})();}}
+                    <Button type={ButtonType.SUBMIT} onClick={(e) => {e.preventDefault(); updateTask().catch(() => {})}}
                     >
                       Save
                     </Button>
@@ -183,7 +183,7 @@ const TasksPage: React.FC = () => {
                     <Button
                       type={ButtonType.SUBMIT}
                       kind={ButtonKind.SECONDARY}
-                      onClick={() => {(async () => {await deleteTask(task.id).catch(() => {});})();}}
+                      onClick={(e) => {e.preventDefault(); deleteTask(task.id).catch(() => {})}}
                     >
                       Delete
                     </Button>
